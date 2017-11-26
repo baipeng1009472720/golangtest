@@ -1,0 +1,25 @@
+<seelog type="adaptive" mininterval="2000000" maxinterval="100000000" critmsgcount="500" minlevel="debug">
+    <exceptions>
+        <exception filepattern="test*" minlevel="error"/>
+    </exceptions>
+    <outputs formatid="all">
+        <rollingfile type="date" filename="all.log" datepattern="2006.01.02" maxrolls="30"/>
+        <filter levels="info">
+            <console formatid="fmtinfo"/>
+        </filter>
+        <filter levels="error,critical" formatid="fmterror">
+            <console/>
+            <file path="errors.log"/>
+            <!--<smtp senderaddress="peng.bai@i-driven.com.cn" sendername="Automatic notification service" hostname="smtp.mxhichina.com" hostport="465" username="peng.bai@i-driven.com.cn" password="123">-->
+                <!--<recipient address="1009472720@qq.com"/>-->
+            <!--</smtp>-->
+        </filter>
+    </outputs>
+    <formats>
+        <format id="fmtinfo" format="[%Date %Time] [%Level] [%FuncShort @ %File.%Line] %Msg%n"/>
+        <format id="fmterror" format="[%Date %Time] [%LEVEL][%FuncShort @ %File.%Line] %Msg%n"/>
+        <format id="all" format="[%Date %Time] [%Level] [%FuncShort @ %File.%Line] %Msg%n"/>
+        <format id="criticalemail"
+                format="Critical error on our server!\n    %Time %Date %RelFile %Func %Msg \nSent by Seelog"/>
+    </formats>
+</seelog>
