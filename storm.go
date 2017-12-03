@@ -7,7 +7,7 @@ import (
 
 type Job struct {
 	JobId  string `storm:"id"`
-	status string `storm:"index"`
+	Status string `storm:"index"`
 }
 
 func main() {
@@ -23,13 +23,17 @@ func main() {
 	if err2 != nil {
 		logs.Error(err2)
 	}
-
-	var job3 Job
-	err3 := db.One("JobId", "111", &job3)
-	if err2 != nil {
+	err3 := db.Update(&Job{"111", "ok1"})
+	if err3 != nil {
 		logs.Error(err3)
 	}
 
-	logs.Info(job3)
+
+	var jobs []Job
+	err22 := db.Find("Status", "ok1", &jobs)
+	if err22 != nil {
+		logs.Error(err22)
+	}
+	logs.Info(jobs)
 
 }
