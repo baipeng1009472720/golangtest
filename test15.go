@@ -36,5 +36,10 @@ func main() {
 	//	}(v)
 	//}
 	//select {}
+	var i = 1
+	for {
+		println(i)
+		i++
+	}
 
 }
